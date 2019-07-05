@@ -31,7 +31,8 @@ constant F : Type → Type
 -- Polymorphic types
 #check list
 #check prod
--- in order to create polymorphic types, one must use universe variables
+-- in order to create polymorphic types, one must use universe variables,
+-- where these variables range over the level of types
 universe u
 constant γ : Type u
 #check γ
@@ -64,4 +65,48 @@ def foo : (ℕ → ℕ) → ℕ := λ f, f 0
 -- alternative notation
 def double (x : ℕ) : ℕ := x + x
 
--- local definitions
+-- local definitions, using the let construct
+#check let y := 2 in y + y
+
+def bar := (λ a : Type, λ x : a, x) nat -- works, because the expression doesn't depend on the value of a
+--def bar := (λ a : Type, λ x : a, x+2) nat -- doesn't work, because x+2 doesn't make sense for every value of a
+
+-- it is better to use variables instead of extending the system with new constants
+-- for that, there are the local declarations and the variable and variables constructs
+def compose (α β γ : Type) (g : β → γ) (f : α → β) (x : α) : γ :=
+    g (f x)
+
+variable k : ℕ
+def my_double := 2 * k
+
+-- sections can help to define scopes
+-- namespaces can be used to group definitions
+-- the construct open allow to use the names inside a namespace
+
+-- dependent type theory: types can depend on parameters
+-- Pi type or dependent function type: Π x:α, β x means 
+-- the type of all functions f which when take a value x
+-- of type α, return a value of type β x
+
+namespace hidden
+
+universe v
+
+constant list : Type v → Type v
+
+constant cons : Π α : Type u, α → list α → list α
+
+#check list ℕ
+
+end hidden
+
+-- seamingly, sigma types generalize the notion of products,
+-- such that the type of the second element depends on
+-- the type of the first element
+
+-- implicit arguments: type inference over dependent types
+-- use _ to hide the type and let the type inference mechanism act
+-- use { } when declaring a parameter, and this will default to
+-- always use the type inference mechanism
+-- { } works also on variables/variable declarations
+
