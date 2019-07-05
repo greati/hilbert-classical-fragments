@@ -5,5 +5,6 @@
 namespace clfrags
 
     constant or : Prop -> Prop -> Prop
+    constant and : Prop -> Prop -> Prop
 
 end clfrags
