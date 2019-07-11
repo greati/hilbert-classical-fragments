@@ -110,3 +110,23 @@ end hidden
 -- always use the type inference mechanism
 -- { } works also on variables/variable declarations
 
+-- tactics mode
+-- tactics are instructions that tell Lean how to construct a proof term
+-- tactics-style contrasts with term-style
+theorem test (p q : Prop) (hp : p) (hq : q) : p ∧ q ∧ p :=
+begin
+    apply and.intro,
+    exact hp,
+    apply and.intro,
+    exact hq,
+    exact hp
+end
+
+#print test
+
+-- one can use the by keyword when there is only one
+-- step for the proof
+-- the include command tells lean to include the indicated variables
+-- the omit keywork limit the effect of an include
+-- examples of tactics: apply, exact, intro, reflexivity, symmetry, transitivity
+
