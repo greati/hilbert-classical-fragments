@@ -129,4 +129,5 @@ end
 -- the include command tells lean to include the indicated variables
 -- the omit keywork limit the effect of an include
 -- examples of tactics: apply, exact, intro, reflexivity, symmetry, transitivity
-
+-- assumption, repeat, fapply, revert, generalize, sorry, rewrite, left, right,
+-- cases, constructor, existsi, split, induction, contradiction
