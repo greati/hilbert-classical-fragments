@@ -131,3 +131,16 @@ end
 -- examples of tactics: apply, exact, intro, reflexivity, symmetry, transitivity
 -- assumption, repeat, fapply, revert, generalize, sorry, rewrite, left, right,
 -- cases, constructor, existsi, split, induction, contradiction
+-- it is possible to mix term-style and tactics-style proofs
+-- := can be used in place of from
+
+-- tactics combinators allows for the creation of
+-- new tactics from old ones
+-- examples: the comma, {tactics1,...,tacticsn}
+-- t1;t2 (parallel), <|> (orelse) try and backtrack when fail, try,
+-- all_goals, any_goals
+
+-- simplifier: a powerful tool for automation, using identities
+-- tagged with [simp] attribute
+-- uses the simp tactic to iteratively rewrite subterms in an expression
+-- keyword at help to simplify a hypothesis
