@@ -4,7 +4,10 @@
  -/
 namespace clfrags
 
-    constant or : Prop -> Prop -> Prop
-    constant and : Prop -> Prop -> Prop
+    constant or : Prop → Prop → Prop
+    notation a ∨ b := or a b
+
+    constant and : Prop → Prop → Prop
+    notation a ∧ b := and a b
 
 end clfrags
