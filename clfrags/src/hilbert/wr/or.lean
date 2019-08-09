@@ -4,10 +4,10 @@ namespace clfrags
     namespace hilbert
         namespace wr
             namespace or
-                axiom ρ₁ : Π {p q : Prop}, p → or p q
-                axiom ρ₂ : Π {p : Prop}, or p p → p
-                axiom ρ₃ : Π {p q : Prop}, or p q → or q p
-                axiom ρ₄ : Π {p q r : Prop}, or p (or q r) → or (or p q) r
+                axiom d₁ : Π {a b : Prop}, a → or a b
+                axiom d₂ : Π {a : Prop}, or a a → a
+                axiom d₃ : Π {a b : Prop}, or a b → or b a
+                axiom d₄ : Π {a b c : Prop}, or a (or b c) → or (or a b) c
             end or 
         end wr
     end hilbert
