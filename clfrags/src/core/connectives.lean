@@ -10,6 +10,8 @@ namespace clfrags
     constant and : Prop → Prop → Prop
     notation a ∧ b := and a b
 
+    constant ka : Prop → Prop → Prop → Prop
+
     constant top : Prop
 
     constant bot : Prop
