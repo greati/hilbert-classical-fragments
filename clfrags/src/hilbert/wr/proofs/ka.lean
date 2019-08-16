@@ -11,7 +11,7 @@ namespace clfrags
                     have h₅ : ka (ka a b c) a a, from ka₆ h₄,
                     show a, from ka₂ h₅
 
-                theorem ka₄' {a b c d : Prop} (h₁ : ka d (ka d c a) b) : ka d c (ka d a b) :=
+                lemma ka₄' {a b c d : Prop} (h₁ : ka d (ka d c a) b) : ka d c (ka d a b) :=
                     have h₂ : ka d b (ka d c a), from ka₃ h₁,
                     have h₃ : ka d (ka d b c) a, from ka₄ h₂,
                     have h₄ : ka d a (ka d b c), from ka₃ h₃,
@@ -24,22 +24,34 @@ namespace clfrags
                     have h₅ : ka e d (ka e b c), from ka₄' h₄,
                     show ka e d (ka a b c), from ka₅ h₁ h₅
 
+                lemma ka_aux₁ {a b c : Prop} (h₁ : ka a b (ka a c c)) : ka a b c :=
+                    have h₂ : ka a (ka a b c) c, from ka₄ h₁,
+                    have h₃ : ka a c (ka a b c), from ka₃ h₂,
+                    have h₄ : a, from ka₀ h₂,
+                    have h₅ : ka a (ka a c (ka a b c)) b, from ka₁ h₄ h₃,
+                    have h₆ : ka a b (ka a c (ka a b c)), from ka₃ h₅,
+                    have h₇ : ka a (ka a b c) (ka a b c), from ka₄ h₆,
+                    show ka a b c, from ka₂ h₇
+
                 theorem ka₂_ast {a b c d : Prop} (h₁ : ka d c (ka a b b)) : ka d c b :=
                     have h₂ : ka d c (ka d b b), from ka₇ h₁,
-                    sorry
+                    show ka d c b, from ka_aux₁ h₂
 
                 theorem ka₃_ast {a b c d e : Prop} (h₁ : ka e d (ka a b c)) : ka e d (ka a c b) := 
-                sorry
+                    sorry
 
                 theorem ka₄_ast {a b c d e f : Prop} (h₁ : ka f e (ka a b (ka a c d))) : 
                     ka f e (ka a (ka a b c) d):= 
-                sorry
+                    sorry
 
                 theorem ka₅_ast {a b c d e f g : Prop} 
                     (h₁ : ka g f (ka a b c)) 
                     (h₂ : ka g f (ka a b (ka a d e))) :
                     ka g f (ka a b (ka c d e)) :=
-                sorry
+                    have h₃ : ka g f (ka g b c), from ka₇ h₁,
+                    have h₄ : ka g (ka g f b) c, from ka₄ h₃,
+                    have h₅ : ka g f (ka g b (ka a d e)), from ka₇ h₂,
+                    sorry
 
                 theorem ka₆_ast {a b c d e f g : Prop} (h₁ : ka g f (ka a c (ka b d e))) :
                     ka g f (ka a c b) :=
