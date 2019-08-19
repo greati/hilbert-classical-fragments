@@ -60,11 +60,16 @@ namespace clfrags
 
                 theorem ka₆_ast {a b c d e f g : Prop} (h₁ : ka g f (ka a c (ka b d e))) :
                     ka g f (ka a c b) :=
-                sorry
+                    have h₂ : ka g f (ka g c (ka b d e)), from ka₇ h₁,
+                    have h₃ : ka g (ka g f c) (ka b d e), from ka₄ h₂,
+                    have h₄ : ka g (ka g f c) b, from ka₆ h₃,
+                    have h₅ : ka g f (ka g c b), from ka₄' h₄,
+                    have h₆ : ka g f a, from ka₆ h₁,
+                    show ka g f (ka a c b), from ka₅ h₆ h₅
                 
                 theorem ka₇_ast {a b c d e f g : Prop} (h₁ : ka g f (ka a c (ka b d e))) :
                     ka g f (ka a c (ka a d e)) :=
-                sorry
+                    sorry
 
             end ka
         end wr
