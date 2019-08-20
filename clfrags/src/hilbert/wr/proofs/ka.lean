@@ -57,7 +57,41 @@ namespace clfrags
 
                 theorem ka₄_ast {a b c d e f : Prop} (h₁ : ka f e (ka a b (ka a c d))) : 
                     ka f e (ka a (ka a b c) d):= 
-                    sorry
+                    have h₂ : ka f e (ka f b (ka a c d)), from ka₇ h₁,
+                    have h₃ : ka f (ka f e b) (ka a c d), from ka₄ h₂,
+                    have h₄ : ka f (ka f e b) (ka f c d), from ka₇ h₃,
+                    have h₅ : ka f (ka f e b) (ka f d c), from ka₃_ast h₄,
+                    have h₆ : ka f (ka f (ka f e b) d) c, from ka₄ h₅,
+                    have h₇ : f, from ka₀ h₁,
+                    have h₈ : ka f (ka f (ka f (ka f e b) d) c) b, from ka₁ h₇ h₆,
+                    have h₉ : ka f (ka f (ka f e b) d) (ka f c b), from ka₄' h₈,
+                    have h₁₀ : ka f (ka f (ka f e b) d) (ka f b c), from ka₃_ast h₉,
+                    have h₁₁ : ka f (ka f e b) (ka f d (ka f b c)), from ka₄' h₁₀,
+                    have h₁₂ : ka f (ka f e b) (ka f (ka f b c) d), from ka₃_ast h₁₁,
+                    let g := ka f (ka f b c) d in
+                        have h₁₃ : ka f (ka f e b) g, from h₁₂,
+                        have h₁₄ : ka f e (ka f b g), from ka₄' h₁₃,
+                        have h₁₅ : ka f e (ka f g b), from ka₃_ast h₁₄,
+                        have h₁₆ : ka f (ka f e g) b, from ka₄ h₁₅,
+                        have h₁₇ : ka f (ka f (ka f e g) b) c, from ka₁ h₇ h₁₆,
+                        have h₁₈ : ka f (ka f e g) (ka f b c), from ka₄' h₁₇,
+                        have h₁₉ : ka f (ka f (ka f e g) (ka f b c)) d, from ka₁ h₇ h₁₈,
+                        have h₂₀ : ka f (ka f e g) (ka f (ka f b c) d), from ka₄' h₁₉,
+                        have h₂₁ : ka f (ka f e g) g, from h₂₀,
+                        have h₂₂ : ka f e (ka f g g), from ka₄' h₂₁,
+                        have h₂₃ : ka f e g, from ka₂_ast h₂₂,
+                        have h₂₄ : ka f e (ka f (ka f b c) d), from h₂₃,
+                        have h₂₅ : ka f e a, from ka₆ h₁,
+                        have h₂₆ : ka f (ka f e a) d, from ka₁ h₇ h₂₅,
+                        have h₂₇ : ka f e (ka f a d), from ka₄' h₂₆,
+                        have h₂₈ : ka f e (ka f d a), from ka₃_ast h₂₇,
+                        have h₂₉ : ka f (ka f e d) a, from ka₄ h₂₈,
+                        have h₃₀ : ka f e (ka f d (ka f b c)), from ka₃_ast h₂₄,
+                        have h₃₁ : ka f (ka f e d) (ka f b c), from ka₄ h₃₀,
+                        have h₃₂ : ka f (ka f e d) (ka a b c), from ka₅ h₂₉ h₃₁,
+                        have h₃₃ : ka f e (ka f d (ka a b c)), from ka₄' h₃₂,
+                        have h₃₄ : ka f e (ka a d (ka a b c)), from ka₅ h₂₅ h₃₃,
+                        show ka f e (ka a (ka a b c) d), from ka₃_ast h₃₄
 
                 theorem ka₅_ast {a b c d e f g : Prop} 
                     (h₁ : ka g f (ka a b c)) 
