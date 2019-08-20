@@ -38,7 +38,22 @@ namespace clfrags
                     show ka d c b, from ka_aux₁ h₂
 
                 theorem ka₃_ast {a b c d e : Prop} (h₁ : ka e d (ka a b c)) : ka e d (ka a c b) := 
-                    sorry
+                    have h₂ : e, from ka₀ h₁,
+                    have h₃ : ka e d a, from ka₆ h₁,
+                    have h₄ : ka e d (ka e b c), from ka₇ h₁,
+                    have h₅ : ka e (ka e d b) c, from ka₄ h₄,
+                    have h₆ : ka e (ka e (ka e d b) c) b, from ka₁ h₂ h₅,
+                    have h₇ : ka e (ka e d b) (ka e c b), from ka₄' h₆,
+                    have h₈ : ka e d (ka e b (ka e c b)), from ka₄' h₇,
+                    have h₉ : ka e (ka e b (ka e c b)) d, from ka₃ h₈,
+                    have h₁₀ : ka e b (ka e (ka e c b) d), from ka₄' h₉,
+                    have h₁₁ : ka e (ka e b (ka e (ka e c b) d)) c, from ka₁ h₂ h₁₀,
+                    have h₁₂ : ka e c (ka e b (ka e (ka e c b) d)), from ka₃ h₁₁,
+                    have h₁₃ : ka e (ka e c b) (ka e (ka e c b) d), from ka₄ h₁₂,
+                    have h₁₄ : ka e (ka e (ka e c b) (ka e c b)) d, from ka₄ h₁₃,
+                    have h₁₅ : ka e d (ka e (ka e c b) (ka e c b)), from ka₃ h₁₄,
+                    have h₁₆ : ka e d (ka e c b), from ka₂_ast h₁₅,
+                    show ka e d (ka a c b), from ka₅ h₃ h₁₆
 
                 theorem ka₄_ast {a b c d e f : Prop} (h₁ : ka f e (ka a b (ka a c d))) : 
                     ka f e (ka a (ka a b c) d):= 
