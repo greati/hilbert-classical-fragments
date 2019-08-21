@@ -118,7 +118,18 @@ namespace clfrags
                 
                 theorem ka₇_ast {a b c d e f g : Prop} (h₁ : ka g f (ka a c (ka b d e))) :
                     ka g f (ka a c (ka a d e)) :=
-                    sorry
+                    have h₂ : ka g f a, from ka₆ h₁,
+                    have h₃ : g, from ka₀ h₁,
+                    have h₄ : ka g (ka g f a) c, from ka₁ h₃ h₂,
+                    have h₅ : ka g f (ka g a c), from ka₄' h₄,
+                    have h₆ : ka g f (ka g c a), from ka₃_ast h₅,
+                    have h₇ : ka g (ka g f c) a, from ka₄ h₆,
+                    have h₈ : ka g f (ka g c (ka b d e)), from ka₇ h₁,
+                    have h₉ : ka g (ka g f c) (ka b d e), from ka₄ h₈,
+                    have h₁₀ : ka g (ka g f c) (ka g d e), from ka₇ h₉,
+                    have h₁₁ : ka g (ka g f c) (ka a d e), from ka₅ h₇ h₁₀,
+                    have h₁₂ : ka g f (ka g c (ka a d e)), from ka₄' h₁₁,
+                    show ka g f (ka a c (ka a d e)), from ka₅ h₂ h₁₂
 
             end ka
         end wr
