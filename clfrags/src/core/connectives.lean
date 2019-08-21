@@ -12,6 +12,8 @@ namespace clfrags
 
     constant ka : Prop → Prop → Prop → Prop
 
+    constant ki : Prop → Prop → Prop → Prop
+
     constant top : Prop
 
     constant bot : Prop
