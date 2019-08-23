@@ -5,37 +5,48 @@ namespace clfrags
         namespace wr
             namespace ki
 
-                theorem ka₁₀ {a b c : Prop} (h₁ : a) (h₂ : c) : ki a b c :=
+                theorem ki₁₀ {a b c : Prop} (h₁ : a) (h₂ : c) : ki a b c :=
                     sorry
 
-                theorem ka'₃ {a b c d : Prop} (h₁ : a) :  
+                theorem ki'₃ {a b c d : Prop} (h₁ : a) :  
                     ki a (ki a b (ki a c d)) (ki a (ki a b c) (ki a b d)) :=
                     sorry
 
-                theorem ka'₄ {a b c d : Prop} (h₁ : a) :  
+                theorem ki'₄ {a b c d : Prop} (h₁ : a) :  
                     ki a (ki a c b) c :=
                     sorry
 
-                theorem ka₀ {a b c : Prop} (h₁ : ki a b c) : a :=
+                theorem ki₀ {a b c : Prop} (h₁ : ki a b c) : a :=
                     sorry
             
-                theorem ka₁₁ {a b : Prop} (h₁ : a) : ki a b b :=
+                theorem ki₁₁ {a b : Prop} (h₁ : a) : ki a b b :=
                     sorry
 
-                theorem ka₁₂ {a b c d : Prop} (h₁ : ki a b (ki a c d)) : ki a c (ki a b d) :=
+                theorem ki₁₂ {a b c d : Prop} (h₁ : ki a b (ki a c d)) : ki a c (ki a b d) :=
                     sorry
 
-                theorem ka₁₃ {a b c : Prop} (h₁ : ki a b (ki a b c)) : ki a b c :=
+                theorem ki₁₃ {a b c : Prop} (h₁ : ki a b (ki a b c)) : ki a b c :=
                     sorry
 
-                theorem ka₁₄ {a b c d : Prop} (h₁ : ki a b d) : ki b b (ki a c d) :=
+                theorem ki₁₄ {a b c d : Prop} (h₁ : ki a b d) : ki b b (ki a c d) :=
                     sorry
 
-                theorem ka₁₅ {a b c d : Prop} (h₁ : ki a b d) : ki c c (ki a b d) :=
+                theorem ki₁₅ {a b c d : Prop} (h₁ : ki a b d) : ki c c (ki a b d) :=
                     sorry
 
-                theorem ka₁₆ {a b c d : Prop} (h₁ : ki a b c) (h₂ : ki a c d) : 
+                theorem ki₁₆ {a b c d : Prop} (h₁ : ki a b c) (h₂ : ki a c d) : 
                     ki a b d :=
+                    sorry
+
+                theorem ki₁_ast {a b c d e : Prop} (h₁ : ki d e b) (h₂ : ki d e (ki a b c)) : ki d e c :=
+                    sorry
+
+                theorem ki₂_ast {a b c d e : Prop} (h₁ : ki d e a) : ki d e (ki a b (ki a c b)) :=
+                    sorry
+
+                theorem ki₃_ast {a b c d e f g h : Prop}
+                    (h₁ : ki g h (ki b f a)) : 
+                    ki g h (ki b f (ki a (ki a c (ki a d e)) (ki a (ki a c d) (ki a c e)))) :=
                     sorry
 
             end ki
