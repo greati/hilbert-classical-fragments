@@ -36,7 +36,16 @@ namespace clfrags
                     show ki a b b, from ki₁ h₅ h₄
 
                 theorem ki₁₂ {a b c d : Prop} (h₁ : ki a b (ki a c d)) : ki a c (ki a b d) :=
-                    sorry
+                    have h₂ : a, from ki₀ h₁,
+                    have h₃ : ki a (ki a b (ki a c d)) (ki a (ki a b c) (ki a b d)), from ki'₃ h₂,
+                    have h₄ : ki a (ki a b c) (ki a b d), from ki₁ h₁ h₃,
+                    have h₅ : ki a c (ki a (ki a b c) (ki a b d)), from ki₁₀ h₂ h₄,
+                    let r := ki a b d, q := ki a b c in
+                        have h₆ : ki a (ki a c (ki a q r)) (ki a (ki a c q) (ki a c r)), from ki'₃ h₂,
+                        have h₇ : ki a (ki a c q) (ki a c r), from ki₁ h₅ h₆,
+                        have h₈ : ki a c q, from ki₂ h₂,
+                        have h₉ : ki a c r, from ki₁ h₈ h₇,
+                        show ki a c (ki a b d), from h₉
 
                 theorem ki₁₃ {a b c : Prop} (h₁ : ki a b (ki a b c)) : ki a b c :=
                     have h₂ : a, from ki₀ h₁,
