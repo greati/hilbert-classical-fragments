@@ -84,6 +84,31 @@ namespace clfrags
                     ki g h (ki b f (ki a (ki a c (ki a d e)) (ki a (ki a c d) (ki a c e)))) :=
                     sorry
 
+                theorem ki₄_ast {a b c d e f g : Prop}
+                    (h₁ : ki f g (ki b e a)) :
+                    ki f g (ki b e (ki a (ki a (ki a c d) c) c)) :=
+                    sorry
+
+                theorem ki₅_ast {a b c d e f : Prop} (h₁ : ki e f (ki a b (ki a c d))) : 
+                    ki e f (ki a (ki b b c) d) :=
+                    sorry
+
+                theorem ki₆_ast {a b c d e f : Prop} (h₁ : ki e f (ki a (ki b b c) d)) :
+                    ki e f (ki a b (ki a c d)) :=
+                    sorry
+
+                theorem ki₇_ast {a b c d e f g : Prop} (h₁ : ki f g (ki a e b)) (h₂ : ki f g (ki a e (ki a c d))) :
+                    ki f g (ki a e (ki b c d)) :=
+                    sorry
+
+                theorem ki₈_ast {a b c d e f g : Prop} (h₁ : ki f g (ki a e (ki b c d))) :
+                    ki f g (ki a e b) :=
+                    sorry
+
+                theorem ki₉_ast {a b c d e f g : Prop} (h₁ : ki f g (ki a e (ki b c d))) :
+                    ki f g (ki a e (ki a c d)) :=
+                    sorry
+
             end ki
         end wr
     end hilbert
