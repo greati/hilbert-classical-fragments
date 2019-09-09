@@ -54,6 +54,14 @@ namespace clfrags
                     have h₈ : pt a b (pt f g (pt c d e)), from pt₇ h₇,
                     have h₉ : pt b a (pt f g (pt c d e)), from pt₂ h₈,
                     have h₁₀ : pt b a (pt f (pt c d e) g), from pt₃_ast h₉,
+                    have h₁₁ : pt b (pt f (pt c d e) g) a, from pt₃ h₁₀,
+                    have h₁₂ : pt (pt f (pt c d e) g) b a, from pt₂ h₁₁,
+                    have h₁₃ : pt f (pt c d e) (pt g b a), from pt₇ h₁₂,
+                    have h₁₄ : pt (pt c d e) f (pt g b a), from pt₂ h₁₃,
+                    have h₁₅ : pt c d (pt e f (pt g b a)), from pt₇ h₁₄,
+                    have h₁₆ : pt d c (pt e f (pt g b a)), from pt₂ h₁₅,
+                    have h₁₇ : pt d (pt e f (pt g b a)) c, from pt₃ h₁₆,
+                    --have h₁₈ : pt (pt d e f) (pt g b a) c, from pt₆ h₁₇,
                     sorry
 
                 theorem pt₈ {a b c : Prop} (h₁ : pt (pt a b c) a b) : c :=
