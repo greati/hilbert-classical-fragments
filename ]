@@ -102,22 +102,11 @@ namespace clfrags
 
                 lemma pt₁₁'' {a b c d e f : Prop} (h₁ : pt e f (pt (pt a b c) b d))
                     : pt e f (pt a c d) :=
-                    have h₂ : pt e f (pt b d (pt a b c)), from pt₃_ast (pt₂_ast h₁),
-                    have h₃ : pt e f (pt (pt b d a) b c), from pt₆_ast h₂,
-                    have h₄ : pt e f (pt c b (pt b d a)), from pt₂_ast (pt₃_ast (pt₂_ast h₃)),
-                    have h₅ : pt e f (pt (pt c b b) d a), from pt₆_ast h₄,
-                    have h₆ : pt e f (pt d a (pt c b b)), from pt₃_ast (pt₂_ast h₅),
-                    have h₇ : pt e f (pt (pt d a c) b b), from pt₆_ast h₆,
-                    have h₈ : pt e f (pt d a c), from pt₅_ast h₇,
-                    show pt e f (pt a c d), from pt₃_ast (pt₂_ast h₈)
+                    sorry
 
                 lemma pt₁₁''' {a b c d e f : Prop} (h₁ : pt e f (pt (pt a b c) a d))
                     : pt e f (pt b c d) :=
-                    have h₂ : pt e f (pt d a (pt a b c)), from pt₂_ast (pt₃_ast (pt₂_ast h₁)),
-                    have h₃ : pt e f (pt (pt d a a) b c), from pt₆_ast h₂,
-                    have h₄ : pt e f (pt b c (pt d a a)), from pt₃_ast (pt₂_ast h₃),
-                    have h₅ : pt e f (pt (pt b c d) a a), from pt₆_ast h₄,
-                    show pt e f (pt b c d), from pt₅_ast h₅
+                    sorry
 
                 theorem pt₁₁ {a b c d : Prop} 
                     (h₁ : pt (pt (pt a b c) a d) (pt (pt a b c) b d) (pt (pt a b c) c d)) : d :=
