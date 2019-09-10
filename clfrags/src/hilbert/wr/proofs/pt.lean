@@ -65,32 +65,96 @@ namespace clfrags
                     sorry
 
                 theorem pt₈ {a b c : Prop} (h₁ : pt (pt a b c) a b) : c :=
-                    sorry
+                    have h₂ : pt a (pt a b c) b, from pt₂ h₁,
+                    have h₃ : pt a b (pt a b c), from pt₃ h₂,
+                    have h₄ : pt a b (pt a c b), from pt₃_ast h₃,
+                    have h₅ : pt a b (pt c a b), from pt₂_ast h₄,
+                    have h₆ : pt a (pt c a b) b, from pt₃ h₅,
+                    have h₇ : pt (pt c a b) a b, from pt₂ h₆,
+                    have h₈ : pt c a (pt b a b), from pt₇ h₇,
+                    have h₉ : pt c a (pt a b b), from pt₂_ast h₈,
+                    have h₁₀ : pt c a a, from pt₅_ast h₉,
+                    show c, from pt₅ h₁₀
 
                 theorem pt₉ {a b c : Prop} (h₁ : pt (pt a b c) a c) : b :=
-                    sorry
+                    have h₂ : pt a b (pt c a c), from pt₇ h₁,
+                    have h₃ : pt a b (pt a c c), from pt₂_ast h₂,
+                    have h₄ : pt a b a, from pt₅_ast h₃,
+                    have h₅ : pt b a a, from pt₂ h₄,
+                    show b, from pt₅ h₅
 
                 theorem pt₁₀ {a b c : Prop} (h₁ : pt (pt a b c) b c) : a :=
+                    have h₂ : pt a b (pt c b c), from pt₇ h₁,
+                    have h₃ : pt a b (pt b c c), from pt₂_ast h₂,
+                    have h₄ : pt a b b, from pt₅_ast h₃,
+                    show a, from pt₅ h₄
+
+                lemma pt₁₁' {a b c d e f : Prop} (h₁ : pt e f (pt (pt a b c) c d))
+                    : pt e f (pt a b d) :=
+                    sorry
+
+                lemma pt₁₁'' {a b c d e f : Prop} (h₁ : pt e f (pt (pt a b c) b d))
+                    : pt e f (pt a c d) :=
+                    sorry
+
+                lemma pt₁₁''' {a b c d e f : Prop} (h₁ : pt e f (pt (pt a b c) a d))
+                    : pt e f (pt b c d) :=
                     sorry
 
                 theorem pt₁₁ {a b c d : Prop} 
                     (h₁ : pt (pt (pt a b c) a d) (pt (pt a b c) b d) (pt (pt a b c) c d)) : d :=
-                    sorry
+                    have h₂ : pt (pt (pt a b c) a d) (pt (pt a b c) b d) (pt a b d), from pt₁₁' h₁,
+                    have h₃ : pt (pt (pt a b c) a d) (pt a b d) (pt (pt a b c) b d), from pt₃ h₂,
+                    have h₄ : pt (pt (pt a b c) a d) (pt a b d) (pt a c d), from pt₁₁'' h₃,
+                    have h₅ : pt (pt a b d) (pt (pt a b c) a d) (pt a c d), from pt₂ h₄,
+                    have h₆ : pt (pt a b d) (pt a c d) (pt (pt a b c) a d) , from pt₃ h₅,
+                    have h₇ : pt (pt a b d) (pt a c d) (pt b c d) , from pt₁₁''' h₆,
+                    have h₈ : pt a b (pt d (pt a c d) (pt b c d)) , from pt₇ h₇,
+                    have h₉ : pt a b (pt (pt a c d) d (pt b c d)) , from pt₂_ast h₈,
+                    have h₁₀ : pt (pt a b (pt a c d)) d (pt b c d) , from pt₆ h₉,
+                    have h₁₁ : pt (pt a b (pt a c d)) d (pt b d c) , from pt₃_ast h₁₀,
+                    have h₁₂ : pt (pt a b (pt a c d)) d (pt d b c) , from pt₂_ast h₁₁,
+                    have h₁₃ : pt (pt (pt a b (pt a c d)) d d) b c, from pt₆ h₁₂,
+                    have h₁₄ : pt b c (pt (pt a b (pt a c d)) d d), from pt₃ (pt₂ h₁₃),
+                    have h₁₅ : pt b c (pt a b (pt a c d)), from pt₅_ast h₁₄,
+                    have h₁₆ : pt b c (pt b a (pt a c d)), from pt₂_ast h₁₅,
+                    have h₁₇ : pt (pt b c b) a (pt a c d), from pt₆ h₁₆,
+                    have h₁₈ : pt a (pt a c d) (pt b c b), from pt₃ (pt₂ h₁₇),
+                    have h₁₉ : pt a (pt a c d) (pt c b b), from pt₂_ast h₁₈,
+                    have h₂₀ : pt a (pt a c d) c, from pt₅_ast h₁₉,
+                    have h₂₁ : pt (pt a c d) a c, from pt₂ h₂₀,
+                    show d, from pt₈ h₂₁
 
                 theorem pt₁₂ {a b c d e : Prop} (h₁ : pt a b c) (h₂ : d) (h₃ : e) 
                     : pt a b (pt c d e) :=
-                    sorry
+                    have h₄ : pt (pt a b c) d e, from pt₁ h₁ h₂ h₃,
+                    show pt a b (pt c d e), from pt₇ h₄
 
                 theorem pt₁₃ {a b c d e : Prop} (h₁ : pt a b c) (h₂ : pt a b d) (h₃ : e) 
-                    : pt a b (pt c d e) :=
-                    sorry
+                    : (pt c d e) :=
+                    have h₄ : pt a b (pt c (pt a b d) e), from pt₁₂ h₁ h₂ h₃,
+                    have h₅ : pt a b (pt (pt a b d) c e), from pt₂_ast h₄,
+                    have h₆ : pt (pt a b (pt a b d)) c e, from pt₆ h₅,
+                    have h₇ : pt c e (pt a b (pt a b d)), from pt₃ (pt₂ h₆),
+                    have h₈ : pt c e (pt (pt a b d) a b), from pt₂_ast (pt₃_ast h₇),
+                    have h₉ : pt c e (pt b d b), from pt₁₁''' h₈,
+                    have h₁₀ : pt c e (pt d b b), from pt₂_ast h₉,
+                    have h₁₁ : pt c e d, from pt₅_ast h₁₀,
+                    show pt c d e, from pt₃ h₁₁
 
                 theorem pt₁₄ {a b c d e : Prop} (h₁ : pt a b c) (h₂ : pt a b d) (h₃ : pt a b e) 
                     : pt a b (pt c d e) :=
-                    sorry
+                    have h₄ : pt c d (pt a b e), from pt₁₃ h₁ h₂ h₃,
+                    have h₅ : pt c d (pt e a b), from pt₂_ast (pt₃_ast h₄),
+                    have h₅ : pt (pt c d e) a b, from pt₆ h₅,
+                    show pt a b (pt c d e), from pt₃ (pt₂ h₅)
 
                 theorem pt₄' {a b c : Prop} (h₁ : a) : pt (pt a b c) b c :=
-                    sorry
+                    have h₂ : pt a b b, from pt₄ h₁,
+                    have h₃ : pt (pt a b b) c c, from pt₄ h₂,
+                    have h₄ : pt  a b (pt b c c), from pt₇ h₃,
+                    have h₅ : pt  a b (pt c b c), from pt₂_ast h₄,
+                    show pt (pt a b c) b c, from pt₆ h₅
 
             end pt
         end wr
