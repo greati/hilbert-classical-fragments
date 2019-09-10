@@ -45,24 +45,23 @@ namespace clfrags
 
                 theorem pt₆_ast {a b c d e f g : Prop} (h₁ : pt f g (pt a b (pt c d e))) 
                     : pt f g (pt (pt a b c) d e) :=
-                    have h₂ : pt f (pt a b (pt c d e)) g, from pt₃ h₁,
-                    have h₃ : pt (pt a b (pt c d e)) f g, from pt₂ h₂,
-                    have h₄ : pt a b (pt (pt c d e) f g), from pt₇ h₃,
-                    have h₅ : pt a b (pt f (pt c d e) g), from pt₂_ast h₄,
-                    have h₆ : pt (pt a b f) (pt c d e) g, from pt₆ h₅,
-                    have h₇ : pt (pt a b f) g (pt c d e), from pt₃ h₆,
-                    have h₈ : pt a b (pt f g (pt c d e)), from pt₇ h₇,
-                    have h₉ : pt b a (pt f g (pt c d e)), from pt₂ h₈,
-                    have h₁₀ : pt b a (pt f (pt c d e) g), from pt₃_ast h₉,
-                    have h₁₁ : pt b (pt f (pt c d e) g) a, from pt₃ h₁₀,
-                    have h₁₂ : pt (pt f (pt c d e) g) b a, from pt₂ h₁₁,
-                    have h₁₃ : pt f (pt c d e) (pt g b a), from pt₇ h₁₂,
-                    have h₁₄ : pt (pt c d e) f (pt g b a), from pt₂ h₁₃,
-                    have h₁₅ : pt c d (pt e f (pt g b a)), from pt₇ h₁₄,
-                    have h₁₆ : pt d c (pt e f (pt g b a)), from pt₂ h₁₅,
-                    have h₁₇ : pt d (pt e f (pt g b a)) c, from pt₃ h₁₆,
-                    --have h₁₈ : pt (pt d e f) (pt g b a) c, from pt₆ h₁₇,
-                    sorry
+                    have h₂ : pt (pt a b (pt c d e)) f g, from pt₂ (pt₃ h₁),
+                    have h₃ : pt a b (pt (pt c d e) f g), from pt₇ h₂,
+                    have h₄ : pt (pt (pt c d e) f g) a b, from pt₂ (pt₃ h₃),
+                    have h₅ : pt (pt c d e) f (pt g a b), from pt₇ h₄, 
+                    have h₆ : pt c d (pt e f (pt g a b)), from pt₇ h₅,
+                    have h₇ : pt (pt e f (pt g a b)) c d, from pt₂ (pt₃ h₆),
+                    have h₈ : pt e f (pt (pt g a b) c d), from pt₇ h₇,
+                    have h₉ : pt (pt (pt g a b) c d) e f, from pt₂ (pt₃ h₈),
+                    have h₁₀ : pt (pt g a b) c (pt d e f), from pt₇ h₉,
+                    have h₁₁ : pt g a (pt b c (pt d e f)), from pt₇ h₁₀,
+                    have h₁₂ : pt (pt b c (pt d e f)) g a, from pt₂ (pt₃ h₁₁),
+                    have h₁₃ : pt b c (pt (pt d e f) g a), from pt₇ h₁₂,
+                    have h₁₄ : pt (pt (pt d e f) g a) b c, from pt₂ (pt₃ h₁₃),
+                    have h₁₅ : pt (pt d e f) g (pt a b c), from pt₇ h₁₄,
+                    have h₁₆ : pt d e (pt f g (pt a b c)), from pt₇ h₁₅,
+                    have h₁₇ : pt (pt f g (pt a b c)) d e, from pt₂ (pt₃ h₁₆),
+                    show pt f g (pt (pt a b c) d e), from pt₇ h₁₇
 
                 theorem pt₈ {a b c : Prop} (h₁ : pt (pt a b c) a b) : c :=
                     have h₂ : pt a (pt a b c) b, from pt₂ h₁,
