@@ -16,6 +16,8 @@ namespace clfrags
 
     constant pt : Prop → Prop → Prop → Prop
 
+    constant dc : Prop → Prop → Prop → Prop
+
     constant top : Prop
 
     constant bot : Prop
