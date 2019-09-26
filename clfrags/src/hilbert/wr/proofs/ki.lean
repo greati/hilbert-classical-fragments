@@ -9,7 +9,6 @@ namespace clfrags
                     have h₃ : ki a c (ki a b c), from ki₂ h₁,
                     show ki a b c, from ki₁ h₂ h₃
 
-
                 theorem ki'₃ {a b c d : Prop} (h₁ : a) :  
                     ki a (ki a b (ki a c d)) (ki a (ki a b c) (ki a b d)) :=
                     have h₂ : ki a a a, from ki₁₀ h₁ h₁,

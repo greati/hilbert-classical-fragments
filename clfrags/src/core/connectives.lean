@@ -18,6 +18,8 @@ namespace clfrags
 
     constant dc : Prop → Prop → Prop → Prop
 
+    constant ad : Prop → Prop → Prop → Prop
+
     constant neg : Prop → Prop
 
     constant top : Prop
