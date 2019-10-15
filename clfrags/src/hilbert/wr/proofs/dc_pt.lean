@@ -214,7 +214,49 @@ namespace clfrags
 
                 theorem dcpt₈_dc {a b c d e f g h i : Prop} (h₁ : dc h i (pt f g (pt (dc a b c) (dc a b d) (dc a b e)))) : 
                     dc h i (pt f g (dc a b (pt c d e))) :=
-                    sorry
+                    have h₂ : pt (dc h i f) (dc h i g) (dc h i (pt (dc a b c) (dc a b d) (dc a b e))), 
+                        from dcpt₁ h₁,
+                    have h₃ : pt (dc h i f) (dc h i g) (pt (dc h i (dc a b c)) (dc h i (dc a b d)) (dc h i (dc a b e))), 
+                        from dcpt₇ h₂,
+                    have h₄ : pt (pt (dc h i f) (dc h i g) (dc h i (dc a b c))) (dc h i (dc a b d)) (dc h i (dc a b e)), 
+                        from pt.pt₆ h₃,
+                    have h₅ : pt (pt (dc h i f) (dc h i g) (dc h i (dc a b c))) (dc h i (dc a b d)) (dc (dc h i a) (dc h i b) e), 
+                        from dc₆'_pt h₄,
+                    have h₆ : pt (pt (dc h i f) (dc h i g) (dc h i (dc a b c))) (dc (dc h i a) (dc h i b) e) (dc h i (dc a b d)), 
+                        from pt.pt₃ h₅,
+                    have h₇ : pt (pt (dc h i f) (dc h i g) (dc h i (dc a b c))) (dc (dc h i a) (dc h i b) e) (dc (dc h i a) (dc h i b) d), 
+                        from dc₆'_pt h₆,
+                    have h₈ : pt (dc h i f) (dc h i g) (pt (dc h i (dc a b c)) (dc (dc h i a) (dc h i b) e) (dc (dc h i a) (dc h i b) d)), 
+                        from pt.pt₇ h₇,
+                    have h₉ : pt (dc h i f) (dc h i g) (pt (dc (dc h i a) (dc h i b) e) (dc (dc h i a) (dc h i b) d) (dc h i (dc a b c))), 
+                        from pt.pt₃_ast (pt.pt₂_ast h₈),
+                    have h₁₀ : pt (pt (dc h i f) (dc h i g) (dc (dc h i a) (dc h i b) e)) (dc (dc h i a) (dc h i b) d) (dc h i (dc a b c)), 
+                        from pt.pt₆ h₉,
+                    have h₁₁ : pt (pt (dc h i f) (dc h i g) (dc (dc h i a) (dc h i b) e)) (dc (dc h i a) (dc h i b) d) (dc (dc h i a) (dc h i b) c), 
+                        from dc₆'_pt h₁₀,
+                    have h₁₂ : pt (dc h i f) (dc h i g) (pt (dc (dc h i a) (dc h i b) e) (dc (dc h i a) (dc h i b) d) (dc (dc h i a) (dc h i b) c)), 
+                        from pt.pt₇ h₁₁,
+                    have h₁₃ : pt (dc h i f) (dc h i g) (pt (dc (dc h i a) (dc h i b) c) (dc (dc h i a) (dc h i b) d) (dc (dc h i a) (dc h i b) e)), 
+                        from pt.pt₂_ast (pt.pt₃_ast (pt.pt₂_ast h₁₂)),
+                    have h₁₄ : pt (dc h i f) (dc h i g) (dc (dc h i a) (dc h i b) (pt c d e)), from dcpt₈ h₁₃,
+                    have h₁₅ : pt (dc h i f) (dc h i g) (dc h i (dc a b (pt c d e))), from dc₇'_pt h₁₄,
+                    show dc h i (pt f g (dc a b (pt c d e))), from dcpt₂ h₁₅
+
+                theorem pt₇_dc {a b c d e f g : Prop} (h₁ : dc f g (pt (pt a b c) d e)) : dc f g (pt a b (pt c d e)) :=
+                    have h₂ : dc f g (pt d (pt a b c) e), from pt₂_dc h₁,
+                    have h₃ : dc f g (pt d e (pt a b c)), from pt₃_dc h₂,
+                    have h₄ : dc f g (pt (pt d e a) b c), from pt₆_dc h₃,
+                    have h₅ : dc f g (pt b (pt d e a) c), from pt₂_dc h₄,
+                    have h₆ : dc f g (pt b c (pt d e a)), from pt₃_dc h₅,
+                    have h₇ : dc f g (pt (pt b c d) e a), from pt₆_dc h₆,
+                    have h₈ : dc f g (pt e (pt b c d) a), from pt₂_dc h₇,
+                    have h₉ : dc f g (pt e a (pt b c d)), from pt₃_dc h₈,
+                    have h₁₀ : dc f g (pt (pt e a b) c d), from pt₆_dc h₉,
+                    have h₁₁ : dc f g (pt c (pt e a b) d), from pt₂_dc h₁₀,
+                    have h₁₂ : dc f g (pt c d (pt e a b)), from pt₃_dc h₁₁,
+                    have h₁₃ : dc f g (pt (pt c d e) a b), from pt₆_dc h₁₂,
+                    have h₁₄ : dc f g (pt a (pt c d e) b), from pt₂_dc h₁₃,
+                    show dc f g (pt a b (pt c d e)), from pt₃_dc h₁₄
 
                 theorem dcpt₁_pt {a b c d e f g : Prop} (h₁ : pt f g (dc a b (pt c d e))) : 
                     pt f g (pt (dc a b c) (dc a b d) (dc a b e)) := dcpt₇ h₁
@@ -224,11 +266,27 @@ namespace clfrags
 
                 theorem dcpt₃_pt {a b c d e f g : Prop} (h₁ : pt f g (pt a b (dc c d e))) :
                     pt f g (dc (pt a b c) (pt a b d) (pt a b e)) := 
-                    sorry
+                    have h₂ : pt (pt f g a) b (dc c d e), from pt.pt₆ h₁,
+                    have h₃ : dc (pt (pt f g a) b c) (pt (pt f g a) b d) (pt (pt f g a) b e), from dcpt₃ h₂,
+                    have h₄ : dc (pt (pt f g a) b c) (pt (pt f g a) b d) (pt f g (pt a b e)), from pt₇_dc h₃,
+                    have h₅ : dc (pt (pt f g a) b c) (pt f g (pt a b e)) (pt (pt f g a) b d), from dc.dc₅' h₄,
+                    have h₆ : dc (pt (pt f g a) b c) (pt f g (pt a b e)) (pt f g (pt a b d)), from pt₇_dc h₅,
+                    have h₇ : dc (pt f g (pt a b e)) (pt f g (pt a b d)) (pt (pt f g a) b c), from dc.dc₅' (dc.dc₄' h₆),
+                    have h₈ : dc (pt f g (pt a b e)) (pt f g (pt a b d)) (pt f g (pt a b c)), from pt₇_dc h₇,
+                    have h₉ : dc (pt f g (pt a b c)) (pt f g (pt a b d)) (pt f g (pt a b e)), from dc.dc₄' (dc.dc₅' (dc.dc₄' h₈)),
+                    show pt f g (dc (pt a b c) (pt a b d) (pt a b e)), from dcpt₄ h₉
 
                 theorem dcpt₄_pt {a b c d e f g : Prop} (h₁ : pt f g (dc (pt a b c) (pt a b d) (pt a b e))) : 
                     pt f g (pt a b (dc c d e)) :=
-                    sorry
+                    have h₂ : dc (pt f g (pt a b c)) (pt f g (pt a b d)) (pt f g (pt a b e)), from dcpt₃ h₁, 
+                    have h₃ : dc (pt f g (pt a b c)) (pt f g (pt a b d)) (pt (pt f g a) b e), from pt₆_dc h₂, 
+                    have h₄ : dc (pt f g (pt a b c)) (pt (pt f g a) b e) (pt f g (pt a b d)), from dc.dc₅' h₃, 
+                    have h₅ : dc (pt f g (pt a b c)) (pt (pt f g a) b e) (pt (pt f g a) b d), from pt₆_dc h₄, 
+                    have h₆ : dc (pt (pt f g a) b e) (pt (pt f g a) b d) (pt f g (pt a b c)), from dc.dc₅' (dc.dc₄' h₅), 
+                    have h₇ : dc (pt (pt f g a) b e) (pt (pt f g a) b d) (pt (pt f g a) b c), from pt₆_dc h₆, 
+                    have h₈ : dc (pt (pt f g a) b c) (pt (pt f g a) b d) (pt (pt f g a) b e), from dc.dc₄' (dc.dc₅' (dc.dc₄' h₇)), 
+                    have h₉ : pt (pt f g a) b (dc c d e), from dcpt₄ h₈,
+                    show pt f g (pt a b (dc c d e)), from pt.pt₇ h₉
 
                 theorem dcpt₅_pt {a b c d e f g h i : Prop} (h₁ : pt h i (dc f g (pt a b (dc c d e)))) :
                     pt h i (dc f g (dc (pt a b c) (pt a b d) (pt a b e))) :=
