@@ -6,7 +6,7 @@ namespace clfrags
         namespace wr
             namespace ka_bot
 
-                theorem  kab₁_or {a b c d e : Prop} (h₁ : ka d e (ka b a bot)) : ka d e (ka b a c) :=
+                theorem  kab₁_ka {a b c d e : Prop} (h₁ : ka d e (ka b a bot)) : ka d e (ka b a c) :=
                     have h₂ : ka d e (ka d a bot), from ka.ka₇ h₁,
                     have h₃ : ka d (ka d e a) bot, from ka.ka₄ h₂,
                     have h₄ : ka d (ka d e a) c, from kab₁ h₃,
