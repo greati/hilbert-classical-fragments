@@ -73,13 +73,13 @@ namespace clfrags
                     have h₆ : ki a (ki a b c) (ki a b d), from ki₁ h₅ h₄,
                     show ki a b d, from ki₁ h₁ h₆
 
-                theorem ki₁_ast {a b c d e : Prop} (h₁ : ki d e b) (h₂ : ki d e (ki a b c)) : ki d e c :=
+                theorem ki₁_ki {a b c d e : Prop} (h₁ : ki d e b) (h₂ : ki d e (ki a b c)) : ki d e c :=
                     have h₃ : ki d e (ki d b c), from ki₉ h₂,
                     have h₄ : ki d b (ki d e c), from ki₁₂ h₃,
                     have h₅ : ki d e (ki d e c), from ki₁₆ h₁ h₄,
                     show ki d e c, from ki₁₃ h₅
 
-                theorem ki₂_ast {a b c d e : Prop} (h₁ : ki d e a) : ki d e (ki a b (ki a c b)) :=
+                theorem ki₂_ki {a b c d e : Prop} (h₁ : ki d e a) : ki d e (ki a b (ki a c b)) :=
                     have h₂ : d, from ki₀ h₁,
                     have h₃ : ki d b (ki d c b), from ki₂ h₂,
                     have h₄ : ki d (ki e e b) (ki d c b), from ki₁₅ h₃,
@@ -88,24 +88,24 @@ namespace clfrags
                     have h₇ : ki d e (ki d b (ki a c b)), from ki₆ h₆,
                     show ki d e (ki a b (ki a c b)), from ki₇ h₁ h₇
 
-                theorem ki₁₀_ast {a b c d e : Prop} (h₁ : ki d e a) (h₂ : ki d e c) : ki d e (ki a b c) :=
-                    have h₃ : ki d e (ki a c (ki a b c)), from ki₂_ast h₁,
-                    show ki d e (ki a b c), from ki₁_ast h₂ h₃
+                theorem ki₁₀_ki {a b c d e : Prop} (h₁ : ki d e a) (h₂ : ki d e c) : ki d e (ki a b c) :=
+                    have h₃ : ki d e (ki a c (ki a b c)), from ki₂_ki h₁,
+                    show ki d e (ki a b c), from ki₁_ki h₂ h₃
 
-                theorem ki₁₂_ast {a b c d e f : Prop} (h₁ : ki e f (ki a b (ki a c d))) : 
+                theorem ki₁₂_ki {a b c d e f : Prop} (h₁ : ki e f (ki a b (ki a c d))) : 
                         ki e f (ki a c (ki a b d)) :=
                     have h₂ : ki e f a, from ki₈ h₁,
                     have h₃ : ki e f (ki a (ki a b (ki a c d)) (ki a (ki a b c) (ki a b d))), from ki₃ h₂,
-                    have h₄ : ki e f (ki a (ki a b c) (ki a b d)), from ki₁_ast h₁ h₃,
-                    have h₅ : ki e f (ki a c (ki a (ki a b c) (ki a b d))), from ki₁₀_ast h₂ h₄,
+                    have h₄ : ki e f (ki a (ki a b c) (ki a b d)), from ki₁_ki h₁ h₃,
+                    have h₅ : ki e f (ki a c (ki a (ki a b c) (ki a b d))), from ki₁₀_ki h₂ h₄,
                     let r := ki a b d, q := ki a b c in
                         have h₆ : ki e f (ki a (ki a c (ki a q r)) (ki a (ki a c q) (ki a c r))), from ki₃ h₂,
-                        have h₇ : ki e f (ki a (ki a c q) (ki a c r)), from ki₁_ast h₅ h₆,
-                        have h₈ : ki e f (ki a c q), from ki₂_ast h₂,
-                        have h₉ : ki e f (ki a c r), from ki₁_ast h₈ h₇,
+                        have h₇ : ki e f (ki a (ki a c q) (ki a c r)), from ki₁_ki h₅ h₆,
+                        have h₈ : ki e f (ki a c q), from ki₂_ki h₂,
+                        have h₉ : ki e f (ki a c r), from ki₁_ki h₈ h₇,
                         show ki e f (ki a c (ki a b d)), from h₉
 
-                theorem ki₃_ast {a b c d e f g h : Prop}
+                theorem ki₃_ki {a b c d e f g h : Prop}
                     (h₁ : ki g h (ki b f a)) : 
                     ki g h (ki b f (ki a (ki a c (ki a d e)) (ki a (ki a c d) (ki a c e)))) :=
                     have h₂ : ki g h (ki g f a), from ki₉ h₁,
@@ -115,7 +115,7 @@ namespace clfrags
                     have h₆ : ki g h b, from ki₈ h₁,
                     show ki g h (ki b f (ki a (ki a c (ki a d e)) (ki a (ki a c d) (ki a c e)))), from ki₇ h₆ h₅
 
-                theorem ki₄_ast {a b c d e f g : Prop}
+                theorem ki₄_ki {a b c d e f g : Prop}
                     (h₁ : ki f g (ki b e a)) :
                     ki f g (ki b e (ki a (ki a (ki a c d) c) c)) :=
                     have h₂ : ki f g (ki f e a), from ki₉ h₁,
@@ -125,25 +125,25 @@ namespace clfrags
                     have h₆ : ki f g b, from ki₈ h₁,
                     show ki f g (ki b e (ki a (ki a (ki a c d) c) c)), from ki₇ h₆ h₅
 
-                theorem ki₅_ast {a b c d e f : Prop} (h₁ : ki e f (ki a b (ki a c d))) : 
+                theorem ki₅_ki {a b c d e f : Prop} (h₁ : ki e f (ki a b (ki a c d))) : 
                     ki e f (ki a (ki b b c) d) :=
                     have h₂ : ki e f (ki e b (ki a c d)), from ki₉ h₁,
                     have h₃ : ki e b (ki e f (ki a c d)), from ki₁₂ h₂,
                     have h₄ : ki e (ki b b f) (ki a c d), from ki₅ h₃,
                     have h₅ : ki e (ki b b f) (ki e c d), from ki₉ h₄,
                     have h₆ : ki e b (ki e f (ki e c d)), from ki₆ h₅,
-                    have h₇ : ki e b (ki e c (ki e f d)), from ki₁₂_ast h₆,
+                    have h₇ : ki e b (ki e c (ki e f d)), from ki₁₂_ki h₆,
                     have h₈ : ki e (ki b b c) (ki e f d), from ki₅ h₇,
                     have h₉ : ki e f (ki e (ki b b c) d), from ki₁₂ h₈,
                     have h₁₀ : ki e f a, from ki₈ h₁,
                     show ki e f (ki a (ki b b c) d), from ki₇ h₁₀ h₉
 
-                theorem ki₆_ast {a b c d e f : Prop} (h₁ : ki e f (ki a (ki b b c) d)) :
+                theorem ki₆_ki {a b c d e f : Prop} (h₁ : ki e f (ki a (ki b b c) d)) :
                     ki e f (ki a b (ki a c d)) :=
                     have h₂ : ki e f (ki e (ki b b c) d), from ki₉ h₁,
                     have h₃ : ki e (ki b b c) (ki e f d), from ki₁₂ h₂,
                     have h₄ : ki e b (ki e c (ki e f d)), from ki₆ h₃,
-                    have h₅ : ki e b (ki e f (ki e c d)), from ki₁₂_ast h₄,
+                    have h₅ : ki e b (ki e f (ki e c d)), from ki₁₂_ki h₄,
                     have h₆ : ki e f (ki e b (ki e c d)), from ki₁₂ h₅,
                     have h₇ : ki e (ki f f b) (ki e c d), from ki₅ h₆,
                     have h₈ : ki e f a, from ki₈ h₁,
@@ -152,7 +152,7 @@ namespace clfrags
                     have h₁₁ : ki e f (ki e b (ki a c d)), from ki₆ h₁₀,
                     show ki e f (ki a b (ki a c d)), from ki₇ h₈ h₁₁
 
-                theorem ki₇_ast {a b c d e f g : Prop} (h₁ : ki f g (ki a e b)) (h₂ : ki f g (ki a e (ki a c d))) :
+                theorem ki₇_ki {a b c d e f g : Prop} (h₁ : ki f g (ki a e b)) (h₂ : ki f g (ki a e (ki a c d))) :
                     ki f g (ki a e (ki b c d)) :=
                     have h₃ : ki f g (ki f e b), from ki₉ h₁,
                     have h₄ : ki f (ki g g e) b, from ki₅ h₃,
@@ -164,7 +164,7 @@ namespace clfrags
                     have h₁₀ : ki f g (ki f e (ki b c d)), from ki₆ h₉,
                     show ki f g (ki a e (ki b c d)), from ki₇ h₅ h₁₀
 
-                theorem ki₈_ast {a b c d e f g : Prop} (h₁ : ki f g (ki a e (ki b c d))) :
+                theorem ki₈_ki {a b c d e f g : Prop} (h₁ : ki f g (ki a e (ki b c d))) :
                     ki f g (ki a e b) :=
                     have h₂ : ki f g (ki f e (ki b c d)), from ki₉ h₁,
                     have h₃ : ki f (ki g g e) (ki b c d), from ki₅ h₂, 
@@ -173,7 +173,7 @@ namespace clfrags
                     have h₆ : ki f g a, from ki₈ h₁,
                     show ki f g (ki a e b), from ki₇ h₆ h₅
 
-                theorem ki₉_ast {a b c d e f g : Prop} (h₁ : ki f g (ki a e (ki b c d))) :
+                theorem ki₉_ki {a b c d e f g : Prop} (h₁ : ki f g (ki a e (ki b c d))) :
                     ki f g (ki a e (ki a c d)) :=
                     have h₂ : ki f g a, from ki₈ h₁,
                     have h₃ : ki f g (ki f e (ki b c d)), from ki₉ h₁,
