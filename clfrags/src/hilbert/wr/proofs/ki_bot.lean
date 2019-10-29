@@ -6,7 +6,7 @@ namespace clfrags
         namespace wr
             namespace ki_bot
 
-                theorem  kib₁_or {a b c d e : Prop} (h₁ : ki d e (ki b a bot)) : ki d e (ki b a c) :=
+                theorem  kib₁_ki {a b c d e : Prop} (h₁ : ki d e (ki b a bot)) : ki d e (ki b a c) :=
                     have h₂ : ki d e (ki d a bot), from ki.ki₉ h₁,
                     have h₃ : ki d (ki e e a) bot, from ki.ki₅ h₂,
                     have h₄ : ki d (ki e e a) c, from kib₁ h₃,
