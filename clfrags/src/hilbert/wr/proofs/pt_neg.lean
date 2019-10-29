@@ -10,9 +10,6 @@ namespace clfrags
                     have h₃ : pt a (neg b) c, from ptn₃ h₂,
                     have h₄ : pt (neg b) a c, from pt.pt₂ h₃,
                     show neg (pt b a c), from ptn₂ h₄
-                   --have h₂ : pt a (neg b) c, from ptn₃ h₁,
-                   --have h₃ : pt (neg b) a c, from pt.pt₂ h₂,
-                   --show neg (pt b a c), from ptn₂ h₃
 
                 theorem pt₃_neg {a b c : Prop} (h₁ : neg (pt a b c)) : neg (pt a c b) :=
                     have h₂ : pt (neg a) b c, from ptn₁ h₁,
@@ -64,7 +61,7 @@ namespace clfrags
                     have h₁₄ : neg (pt a (pt c d e) b), from pt₂_neg h₁₃,
                     show neg (pt a b (pt c d e)), from pt₃_neg h₁₄
 
-                theorem n₁_ast {a b c d : Prop} (h₁ : pt c d a) (h₂ : pt c d (neg a)) : pt c d b :=
+                theorem n₁_pt {a b c d : Prop} (h₁ : pt c d a) (h₂ : pt c d (neg a)) : pt c d b :=
                     have h₃ : pt a c d, from pt.pt₂ (pt.pt₃ h₁),
                     have h₄ : pt (neg a) c d, from pt.pt₂ (pt.pt₃ h₂),
                     have h₅ : neg (pt a c d), from ptn₂ h₄,
@@ -94,7 +91,7 @@ namespace clfrags
  --                  have h₁₀ : pt b c (pt a (neg a) (neg a)), from pt.pt₂_ast h₉,
  --                  show pt b c a, from pt.pt₅_ast h₁₀
 
-                theorem ptn₁_ast {a b c d e : Prop} (h₁ : pt d e (neg (pt a b c))) : pt d e (pt (neg a) b c) :=
+                theorem ptn₁_pt {a b c d e : Prop} (h₁ : pt d e (neg (pt a b c))) : pt d e (pt (neg a) b c) :=
                     have h₂ : pt (neg (pt a b c)) d e, from pt.pt₂ (pt.pt₃ h₁),
                     have h₃ : neg (pt (pt a b c) d e), from ptn₂ h₂,
                     have h₄ : neg (pt a b (pt c d e)), from pt₇_neg h₃,
@@ -102,7 +99,7 @@ namespace clfrags
                     have h₆ : pt (pt (neg a) b c) d e, from pt.pt₆ h₅,
                     show pt d e (pt (neg a) b c), from pt.pt₃ (pt.pt₂ h₆)
 
-                theorem ptn₂_ast {a b c d e : Prop} (h₁ : pt d e (pt (neg a) b c))  : pt d e (neg (pt a b c)) :=
+                theorem ptn₂_pt {a b c d e : Prop} (h₁ : pt d e (pt (neg a) b c))  : pt d e (neg (pt a b c)) :=
                     have h₂ : pt (pt (neg a) b c) d e, from pt.pt₂ (pt.pt₃ h₁),
                     have h₃ : pt (neg a) b (pt c d e), from pt.pt₇ h₂,
                     have h₄ : neg (pt a b (pt c d e)), from ptn₂ h₃,
@@ -110,7 +107,7 @@ namespace clfrags
                     have h₆ : pt (neg (pt a b c)) d e, from ptn₁ h₅,
                     show pt d e (neg (pt a b c)), from pt.pt₃ (pt.pt₂ h₆)
 
-                theorem ptn₃_ast {a b c d e : Prop} (h₁ : pt d e (neg (pt a b c))) : pt d e (pt a (neg b) c) :=
+                theorem ptn₃_pt {a b c d e : Prop} (h₁ : pt d e (neg (pt a b c))) : pt d e (pt a (neg b) c) :=
                     have h₂ : pt (neg (pt a b c)) d e, from pt.pt₂ (pt.pt₃ h₁),
                     have h₃ : neg (pt (pt a b c) d e), from ptn₂ h₂,
                     have h₄ : neg (pt a b (pt c d e)), from pt₇_neg h₃,
