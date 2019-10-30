@@ -291,111 +291,105 @@ namespace clfrags
 
                 theorem dcpt₃_pt {a b c d e f g : Prop} (h₁ : pt f g (pt a b (dc c d e))) :
                     pt f g (dc (pt a b c) (pt a b d) (pt a b e)) := 
-                    have h₂ : pt (pt f g a) b (dc c d e), from pt.pt₆ h₁,
-                    have h₃ : dc (pt (pt f g a) b c) (pt (pt f g a) b d) (pt (pt f g a) b e), from dcpt₃ h₂,
-                    have h₄ : dc (pt (pt f g a) b c) (pt (pt f g a) b d) (pt f g (pt a b e)), from pt₇_dc h₃,
-                    have h₅ : dc (pt (pt f g a) b c) (pt f g (pt a b e)) (pt (pt f g a) b d), from dc.dc₅' h₄,
-                    have h₆ : dc (pt (pt f g a) b c) (pt f g (pt a b e)) (pt f g (pt a b d)), from pt₇_dc h₅,
-                    have h₇ : dc (pt f g (pt a b e)) (pt f g (pt a b d)) (pt (pt f g a) b c), from dc.dc₅' (dc.dc₄' h₆),
-                    have h₈ : dc (pt f g (pt a b e)) (pt f g (pt a b d)) (pt f g (pt a b c)), from pt₇_dc h₇,
-                    have h₉ : dc (pt f g (pt a b c)) (pt f g (pt a b d)) (pt f g (pt a b e)), from dc.dc₄' (dc.dc₅' (dc.dc₄' h₈)),
-                    show pt f g (dc (pt a b c) (pt a b d) (pt a b e)), from dcpt₄ h₉
+                    let a' := pt f g a, c' := pt a b c, d' := pt a b d, e' := pt a b e in
+                        have h₂ : pt a' b (dc c d e), from pt.pt₆ h₁,
+                        have h₃ : dc (pt a' b c) (pt a' b d) (pt a' b e), from dcpt₃ h₂,
+                        have h₄ : dc (pt a' b c) (pt a' b d) (pt f g e'), from pt₇_dc h₃,
+                        have h₅ : dc (pt a' b c) (pt f g e') (pt a' b d), from dc.dc₅' h₄,
+                        have h₆ : dc (pt a' b c) (pt f g e') (pt f g d'), from pt₇_dc h₅,
+                        have h₇ : dc (pt f g e') (pt f g d') (pt a' b c), from dc.dc₅' (dc.dc₄' h₆),
+                        have h₈ : dc (pt f g e') (pt f g d') (pt f g c'), from pt₇_dc h₇,
+                        have h₉ : dc (pt f g c') (pt f g d') (pt f g e'), from dc.dc₄' (dc.dc₅' (dc.dc₄' h₈)),
+                        show pt f g (dc c' d' e'), from dcpt₄ h₉
 
                 theorem dcpt₄_pt {a b c d e f g : Prop} (h₁ : pt f g (dc (pt a b c) (pt a b d) (pt a b e))) : 
                     pt f g (pt a b (dc c d e)) :=
-                    have h₂ : dc (pt f g (pt a b c)) (pt f g (pt a b d)) (pt f g (pt a b e)), from dcpt₃ h₁, 
-                    have h₃ : dc (pt f g (pt a b c)) (pt f g (pt a b d)) (pt (pt f g a) b e), from pt₆_dc h₂, 
-                    have h₄ : dc (pt f g (pt a b c)) (pt (pt f g a) b e) (pt f g (pt a b d)), from dc.dc₅' h₃, 
-                    have h₅ : dc (pt f g (pt a b c)) (pt (pt f g a) b e) (pt (pt f g a) b d), from pt₆_dc h₄, 
-                    have h₆ : dc (pt (pt f g a) b e) (pt (pt f g a) b d) (pt f g (pt a b c)), from dc.dc₅' (dc.dc₄' h₅), 
-                    have h₇ : dc (pt (pt f g a) b e) (pt (pt f g a) b d) (pt (pt f g a) b c), from pt₆_dc h₆, 
-                    have h₈ : dc (pt (pt f g a) b c) (pt (pt f g a) b d) (pt (pt f g a) b e), from dc.dc₄' (dc.dc₅' (dc.dc₄' h₇)), 
-                    have h₉ : pt (pt f g a) b (dc c d e), from dcpt₄ h₈,
-                    show pt f g (pt a b (dc c d e)), from pt.pt₇ h₉
+                    let a' := pt f g a, c' := pt a b c, d' := pt a b d, e' := pt a b e in
+                        have h₂ : dc (pt f g c') (pt f g (pt a b d)) (pt f g e'), from dcpt₃ h₁, 
+                        have h₃ : dc (pt f g c') (pt f g (pt a b d)) (pt a' b e), from pt₆_dc h₂, 
+                        have h₄ : dc (pt f g c') (pt a' b e) (pt f g (pt a b d)), from dc.dc₅' h₃, 
+                        have h₅ : dc (pt f g c') (pt a' b e) (pt a' b d), from pt₆_dc h₄, 
+                        have h₆ : dc (pt a' b e) (pt a' b d) (pt f g c'), from dc.dc₅' (dc.dc₄' h₅), 
+                        have h₇ : dc (pt a' b e) (pt a' b d) (pt a' b c), from pt₆_dc h₆, 
+                        have h₈ : dc (pt a' b c) (pt a' b d) (pt a' b e), from dc.dc₄' (dc.dc₅' (dc.dc₄' h₇)), 
+                        have h₉ : pt a' b (dc c d e), from dcpt₄ h₈,
+                        show pt f g (pt a b (dc c d e)), from pt.pt₇ h₉
 
                 theorem dcpt₅_pt {a b c d e f g h i : Prop} (h₁ : pt h i (dc f g (pt a b (dc c d e)))) :
                     pt h i (dc f g (dc (pt a b c) (pt a b d) (pt a b e))) :=
-                    have h₂ : dc (pt h i f) (pt h i g) (pt h i (pt a b (dc c d e))), from dcpt₃ h₁,
-                    have h₃ : dc (pt h i f) (pt h i g) (pt (pt h i a) b (dc c d e)), from pt₆_dc h₂,
-                    have h₄ : dc (pt h i f) (pt h i g) (dc (pt (pt h i a) b c) (pt (pt h i a) b d) (pt (pt h i a) b e)), from dcpt₅ h₃,
-                    have h₅ : dc (dc (pt h i f) (pt h i g) (pt (pt h i a) b c)) 
-                                 (dc (pt h i f) (pt h i g) (pt (pt h i a) b d)) 
-                                 (pt (pt h i a) b e), from dc.dc₆' h₄,
-                    have h₆ : dc (dc (pt h i f) (pt h i g) (pt (pt h i a) b c)) 
-                                 (dc (pt h i f) (pt h i g) (pt (pt h i a) b d)) 
-                                 (pt h i (pt a b e)), from pt₇_dc h₅,
-                    have h₇ : dc (pt h i f) (pt h i g) (dc (pt (pt h i a) b c) (pt (pt h i a) b d) (pt h i (pt a b e))), 
-                        from dc.dc₇' h₆,
-                    have h₈ : dc (pt h i g) (pt h i f) (dc (pt (pt h i a) b c) (pt h i (pt a b e)) (pt (pt h i a) b d)), 
-                        from dc.dc₅ h₇,
-                    have h₉ : dc (dc (pt h i g) (pt h i f) (pt (pt h i a) b c)) 
-                              (dc (pt h i g) (pt h i f) (pt h i (pt a b e))) 
-                              (pt (pt h i a) b d), from dc.dc₆' h₈,
-                    have h₁₀ : dc (dc (pt h i g) (pt h i f) (pt (pt h i a) b c)) 
-                              (dc (pt h i g) (pt h i f) (pt h i (pt a b e))) 
-                              (pt h i (pt a b d)), from pt₇_dc h₉,
-                    have h₁₁ : dc (pt h i g) (pt h i f) (dc (pt (pt h i a) b c) (pt h i (pt a b e)) (pt h i (pt a b d))),
-                        from dc.dc₇' h₁₀,
-                    have h₁₂ : dc (pt h i g) (pt h i f) (dc (pt h i (pt a b e)) (pt h i (pt a b d)) (pt (pt h i a) b c)),
-                        from dc.dc₅ (dc.dc₄ h₁₁),
-                    have h₁₃ : dc (dc (pt h i g) (pt h i f) (pt h i (pt a b e))) 
-                               (dc (pt h i g) (pt h i f) (pt h i (pt a b d))) 
-                               (pt (pt h i a) b c),
-                        from dc.dc₆' h₁₂,
-                    have h₁₄ : dc (dc (pt h i g) (pt h i f) (pt h i (pt a b e))) 
-                               (dc (pt h i g) (pt h i f) (pt h i (pt a b d))) 
-                               (pt h i (pt a b c)),
-                        from pt₇_dc h₁₃,
-                    have h₁₅ : dc (pt h i g) (pt h i f) (dc (pt h i (pt a b e)) (pt h i (pt a b d)) (pt h i (pt a b c))),
-                        from dc.dc₇' h₁₄,
-                    have h₁₆ : dc (pt h i f) (pt h i g) (dc (pt h i (pt a b c)) (pt h i (pt a b d)) (pt h i (pt a b e))),
-                        from dc.dc₄ (dc.dc₅ (dc.dc₄ h₁₅)),
-                    have h₁₇ : dc (pt h i f) (pt h i g) (pt h i (dc (pt a b c) (pt a b d) (pt a b e))),
-                        from dcpt₆ h₁₆,
-                    show pt h i (dc f g (dc (pt a b c) (pt a b d) (pt a b e))), from dcpt₄ h₁₇
+                    let f' := pt h i f, g' := pt h i g, a' := pt h i a, d' := pt a b d, e' := pt a b e in
+                        have h₂ : dc f' g' (pt h i (pt a b (dc c d e))), 
+                            from dcpt₃ h₁,
+                        have h₃ : dc f' g' (pt a' b (dc c d e)), 
+                            from pt₆_dc h₂,
+                        have h₄ : dc f' g' (dc (pt a' b c) (pt a' b d) (pt a' b e)), 
+                            from dcpt₅ h₃,
+                        have h₅ : dc (dc f' g' (pt a' b c)) (dc f' g' (pt a' b d)) (pt a' b e), 
+                            from dc.dc₆' h₄,
+                        have h₆ : dc (dc f' g' (pt a' b c)) (dc f' g' (pt a' b d)) (pt h i e'), 
+                            from pt₇_dc h₅,
+                        have h₇ : dc f' g' (dc (pt a' b c) (pt a' b d) (pt h i e')), 
+                            from dc.dc₇' h₆,
+                        have h₈ : dc g' f' (dc (pt a' b c) (pt h i e') (pt a' b d)), 
+                            from dc.dc₅ h₇,
+                        have h₉ : dc (dc g' f' (pt a' b c)) (dc g' f' (pt h i e')) (pt a' b d), 
+                            from dc.dc₆' h₈,
+                        have h₁₀ : dc (dc g' f' (pt a' b c)) (dc g' f' (pt h i e')) (pt h i d'), 
+                            from pt₇_dc h₉,
+                        have h₁₁ : dc g' f' (dc (pt a' b c) (pt h i e') (pt h i d')),
+                            from dc.dc₇' h₁₀,
+                        have h₁₂ : dc g' f' (dc (pt h i e') (pt h i d') (pt a' b c)),
+                            from dc.dc₅ (dc.dc₄ h₁₁),
+                        have h₁₃ : dc (dc g' f' (pt h i e')) (dc g' f' (pt h i d')) (pt a' b c),
+                            from dc.dc₆' h₁₂,
+                        have h₁₄ : dc (dc g' f' (pt h i e')) (dc g' f' (pt h i d')) (pt h i (pt a b c)),
+                            from pt₇_dc h₁₃,
+                        have h₁₅ : dc g' f' (dc (pt h i e') (pt h i d') (pt h i (pt a b c))),
+                            from dc.dc₇' h₁₄,
+                        have h₁₆ : dc f' g' (dc (pt h i (pt a b c)) (pt h i d') (pt h i e')),
+                            from dc.dc₄ (dc.dc₅ (dc.dc₄ h₁₅)),
+                        have h₁₇ : dc f' g' (pt h i (dc (pt a b c) d' e')),
+                            from dcpt₆ h₁₆,
+                        show pt h i (dc f g (dc (pt a b c) d' e')), 
+                            from dcpt₄ h₁₇
                 
                 theorem dcpt₆_pt {a b c d e f g h i : Prop} (h₁ : pt h i (dc f g (dc (pt a b c) (pt a b d) (pt a b e)))) :
                     pt h i (dc f g (pt a b (dc c d e))) :=
-                    have h₂ : dc (pt h i f) (pt h i g) (pt h i (dc (pt a b c) (pt a b d) (pt a b e))), from dcpt₃ h₁,
-                    have h₃ : dc (pt h i f) (pt h i g) (dc (pt h i (pt a b c)) (pt h i (pt a b d)) (pt h i (pt a b e))),
-                        from dcpt₅ h₂,
-                    have h₄ : dc (pt h i g) (pt h i f) (dc (pt h i (pt a b e)) (pt h i (pt a b d)) (pt h i (pt a b c))),
-                        from dc.dc₄ (dc.dc₅ (dc.dc₄ h₃)),
-                    have h₅ : dc (dc (pt h i g) (pt h i f) (pt h i (pt a b e))) 
-                              (dc (pt h i g) (pt h i f) (pt h i (pt a b d))) 
-                              (pt h i (pt a b c)),
-                        from dc.dc₆' h₄,
-                    have h₆ : dc (dc (pt h i g) (pt h i f) (pt h i (pt a b e))) 
-                              (dc (pt h i g) (pt h i f) (pt h i (pt a b d))) 
-                              (pt (pt h i a) b c),
-                        from pt₆_dc h₅,
-                    have h₇ : dc (pt h i g) (pt h i f) (dc (pt h i (pt a b e)) (pt h i (pt a b d)) (pt (pt h i a) b c)),
-                        from dc.dc₇' h₆,
-                    have h₈ : dc (pt h i g) (pt h i f) (dc (pt (pt h i a) b c) (pt h i (pt a b e)) (pt h i (pt a b d))),
-                       from dc.dc₄ (dc.dc₅ h₇),
-                   have h₉ : dc (dc (pt h i g) (pt h i f) (pt (pt h i a) b c)) 
-                             (dc (pt h i g) (pt h i f) (pt h i (pt a b e))) 
-                             (pt h i (pt a b d)), from dc.dc₆' h₈,
-                   have h₁₀ : dc (dc (pt h i g) (pt h i f) (pt (pt h i a) b c)) 
-                             (dc (pt h i g) (pt h i f) (pt h i (pt a b e))) 
-                             (pt (pt h i a) b d), from pt₆_dc h₉,
-                   have h₁₁ : dc (pt h i g) (pt h i f) (dc (pt (pt h i a) b c) (pt h i (pt a b e)) (pt (pt h i a) b d)), 
-                       from dc.dc₇' h₁₀,
-                   have h₁₂ : dc (pt h i f) (pt h i g) (dc (pt (pt h i a) b c) (pt (pt h i a) b d) (pt h i (pt a b e))), 
-                       from dc.dc₅ h₁₁,
-                   have h₁₃ : dc (dc (pt h i f) (pt h i g) (pt (pt h i a) b c)) 
-                             (dc (pt h i f) (pt h i g) (pt (pt h i a) b d)) 
-                             (pt h i (pt a b e)),
-                       from dc.dc₆' h₁₂,
-                   have h₁₄ : dc (dc (pt h i f) (pt h i g) (pt (pt h i a) b c)) 
-                             (dc (pt h i f) (pt h i g) (pt (pt h i a) b d)) 
-                             (pt (pt h i a) b e),
-                       from pt₆_dc h₁₃,
-                   have h₁₅ : dc (pt h i f) (pt h i g) (dc (pt (pt h i a) b c) (pt (pt h i a) b d) (pt (pt h i a) b e)), 
-                       from dc.dc₇' h₁₄,
-                   have h₁₆ : dc (pt h i f) (pt h i g) (pt (pt h i a) b (dc c d e)), from dcpt₆ h₁₅,
-                   have h₁₇ : dc (pt h i f) (pt h i g) (pt h i (pt a b (dc c d e))), from pt₇_dc h₁₆,
-                   show pt h i (dc f g (pt a b (dc c d e))), from dcpt₄ h₁₇
+                    let f' := pt h i f, g' := pt h i g, a' := pt h i a, d' := pt a b d, e' := pt a b e in
+                        have h₂ : dc f' g' (pt h i (dc (pt a b c) d' e')), 
+                            from dcpt₃ h₁,
+                        have h₃ : dc f' g' (dc (pt h i (pt a b c)) (pt h i d') (pt h i e')),
+                            from dcpt₅ h₂,
+                        have h₄ : dc g' f' (dc (pt h i e') (pt h i d') (pt h i (pt a b c))),
+                            from dc.dc₄ (dc.dc₅ (dc.dc₄ h₃)),
+                        have h₅ : dc (dc g' f' (pt h i e')) (dc g' f' (pt h i d')) (pt h i (pt a b c)),
+                            from dc.dc₆' h₄,
+                        have h₆ : dc (dc g' f' (pt h i e')) (dc g' f' (pt h i d')) (pt a' b c),
+                            from pt₆_dc h₅,
+                        have h₇ : dc g' f' (dc (pt h i e') (pt h i d') (pt a' b c)),
+                            from dc.dc₇' h₆,
+                        have h₈ : dc g' f' (dc (pt a' b c) (pt h i e') (pt h i d')),
+                            from dc.dc₄ (dc.dc₅ h₇),
+                        have h₉ : dc (dc g' f' (pt a' b c)) (dc g' f' (pt h i e')) (pt h i d'), 
+                            from dc.dc₆' h₈,
+                        have h₁₀ : dc (dc g' f' (pt a' b c)) (dc g' f' (pt h i e')) (pt a' b d), 
+                            from pt₆_dc h₉,
+                        have h₁₁ : dc g' f' (dc (pt a' b c) (pt h i e') (pt a' b d)), 
+                            from dc.dc₇' h₁₀,
+                        have h₁₂ : dc f' g' (dc (pt a' b c) (pt a' b d) (pt h i e')), 
+                            from dc.dc₅ h₁₁,
+                        have h₁₃ : dc (dc f' g' (pt a' b c)) (dc f' g' (pt a' b d)) (pt h i e'),
+                            from dc.dc₆' h₁₂,
+                        have h₁₄ : dc (dc f' g' (pt a' b c)) (dc f' g' (pt a' b d)) (pt a' b e),
+                            from pt₆_dc h₁₃,
+                        have h₁₅ : dc f' g' (dc (pt a' b c) (pt a' b d) (pt a' b e)), 
+                            from dc.dc₇' h₁₄,
+                        have h₁₆ : dc f' g' (pt a' b (dc c d e)),
+                            from dcpt₆ h₁₅,
+                        have h₁₇ : dc f' g' (pt h i (pt a b (dc c d e))), 
+                            from pt₇_dc h₁₆,
+                        show pt h i (dc f g (pt a b (dc c d e))), 
+                            from dcpt₄ h₁₇
 
                 theorem dcpt₇_pt {a b c d e f g h i : Prop} (h₁ : pt h i (pt f g (dc a b (pt c d e)))) : 
                     pt h i (pt f g (pt (dc a b c) (dc a b d) (dc a b e))) :=
