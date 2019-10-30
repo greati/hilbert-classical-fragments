@@ -6,13 +6,13 @@ namespace clfrags
         namespace wr
             namespace dc_neg
 
-                theorem dcn₁_ast {a b c d e f : Prop} (h₁ : dc e f (dc c d (dc b a (neg a)))) 
+                theorem dcn₁_dc {a b c d e f : Prop} (h₁ : dc e f (dc c d (dc b a (neg a)))) 
                 : dc e f (dc c d b) :=
                     have h₂ : dc (dc e f c) (dc e f d) (dc b a (neg a)), from dc.dc₆' h₁,
                     have h₃ : dc (dc e f c) (dc e f d) b, from dcn₁ h₂,
                     show dc e f (dc c d b), from dc.dc₇' h₃
 
-                theorem dcn₂_ast {a b c d e f : Prop} (h₁ : dc e f (dc c d b)) 
+                theorem dcn₂_dc {a b c d e f : Prop} (h₁ : dc e f (dc c d b)) 
                 : dc e f (dc c d (dc b a (neg a))) :=
                     have h₂ : dc (dc e f c) (dc e f d) b, from dc.dc₆' h₁,
                     have h₃ : dc (dc e f c) (dc e f d) (dc b a (neg a)), from dcn₂ h₂,
@@ -32,9 +32,9 @@ namespace clfrags
                     have h₄ : dc (dc a b b) (dc a b a) (neg a), from dc.dc₆' h₃,
                     have h₅ : dc (neg a) (dc a b b) (dc a b a), from dc.dc₄' (dc.dc₅' h₄),
                     have h₆ : dc (neg a) (dc a b b) (dc b a a), from dc.dc₅ (dc.dc₄ h₅),
-                    have h₇ : dc (neg a) (dc a b b) a, from dc.dc₂_ast h₆,
+                    have h₇ : dc (neg a) (dc a b b) a, from dc.dc₂_dc h₆,
                     have h₈ : dc (neg a) a (dc a b b), from dc.dc₅' h₇,
-                    have h₉ : dc (neg a) a b, from dc.dc₂_ast h₈,
+                    have h₉ : dc (neg a) a b, from dc.dc₂_dc h₈,
                     show dc b a (neg a), from dc.dc₅' (dc.dc₄' (dc.dc₅' h₉))
 
             end dc_neg 
