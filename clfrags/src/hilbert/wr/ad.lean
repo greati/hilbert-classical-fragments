@@ -6,7 +6,7 @@ namespace clfrags
             namespace ad
                 axiom ad₁ : Π {a b c : Prop}, c → ad a b c → a
                 axiom ad₂ : Π {a b c : Prop}, a → ad (ad c a b) a c
-                axiom ad₃ : Π {a b c d e f: Prop}, ad a b c → ad (ad (ad (ad f a d) a (ad e a d)) a (ad (ad f a e) a d)) b c
+                axiom ad₃ : Π {a b c d e f : Prop}, ad a b c → ad (ad (ad (ad f a d) a (ad e a d)) a (ad (ad f a e) a d)) b c
                 axiom ad₄ : Π {a b c d e : Prop}, ad a b c → ad (ad d a (ad d a (ad e a d))) b c
                 axiom ad₅ : Π {a b c : Prop}, ad a b c → ad b a b
                 axiom ad₆ : Π {a b c : Prop}, a → ad a b c
