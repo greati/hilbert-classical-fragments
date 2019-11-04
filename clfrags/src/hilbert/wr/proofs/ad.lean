@@ -20,11 +20,6 @@ namespace clfrags
                     show ad (ad a d e) b c, from ad₁₁ h₃
             
                 theorem ad₆' {a b : Prop} (h₁ : a) : a or b := ad₆ h₁
-
-                --theorem ad₂' {a b c d e : Prop} (h₁ : ad a d e) : 
-                --    ((ad c a c) or (ad c a b)) or ((ad a d e) or (ad c a b)) :=
-                --    sorry
-
                 
                 theorem ad₁_ad {a b c d e : Prop} (h₁ : ad c d e) (h₂ : ad (ad a b c) d e) :
                     ad a d e := 
@@ -197,11 +192,11 @@ namespace clfrags
                         from δ_or₁ h₆ h₉,
                     have h₁₁ : ad (ad e a b) f g → ad (ad (ad e d c) a b) f g,
                         from T₁ h₃ h₁₀,
-                    have h₁₂ : ad (ad e d c) f g → ((ad e f g) or (ad e d c)),
-                        from ad₁₀,
-                    --have h₁₃ : ((ad (ad e a b) f g) or (ad (ad e d c) f g)) → ad (ad (ad e d c) a b) f g,
-                    --    from δ_or₁ h₁₁ h₁₂,
-                    sorry
+                    have h₁₂ : ad (ad e d c) f g → ad (ad (ad e d c) a b) f g,
+                        from (assume h, ad₂₇ (ad₆ (ad₁₁ (ad₁₀ h)))),
+                    have h₁₃ : ((ad (ad e a b) f g) or (ad (ad e d c) f g)) → ad (ad (ad e d c) a b) f g,
+                        from δ_or₁ h₁₁ h₁₂,
+                    (T₁ h₂ h₁₃) h₁
             end ad
         end wr
     end hilbert
