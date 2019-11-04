@@ -34,7 +34,7 @@ namespace clfrags
 
                 notation a `or` b := ad a b a
 
-                constant M₂ : ∀ {a b c : Prop}, (a → b) → (c → a → b)
+                constant M₁ : ∀ {a b c : Prop}, (a → b) → (c → a → b)
                 constant R : ∀ {a : Prop}, a → a
                 constant T₁ : ∀ {a b c : Prop}, (a → b) → (b → c) → (a → c)
                 constant δ_or₁ : ∀ {a b c : Prop}, (a → c) → (b → c) → ((a or b) → c)
